@@ -2,7 +2,7 @@
 Blinks. Just blinks. Nothing more. Nothing less. Interesting huh?
 
 
-//GOAL: MAKE SEVEN SEG COUNTER (0-9)
+//GOAL: Make a SEVEN SEGMENT COUNTER (counts from 0 up to 9)
 
 /*
  * HOW TO SHIFT NUMBERS IN C
@@ -15,10 +15,8 @@ Blinks. Just blinks. Nothing more. Nothing less. Interesting huh?
  * write a function that accepts a uint8_t input that outputs the corresponding leds on the 7 seg display, hint switch
  * debug (try not to cry)
  */
-//HOW TO SHIFT NUMBERS IN C
-//00111000 >> 1 = 00011100
-//00111000 >> 2 = 00001110
-//x%2 = true if x is odd -OR- x%2 = false (least sig. bit is 0)
+
+
 
 //All numbers = GPIO - General Purpose Input Output
 #define SRCLK 4
@@ -51,74 +49,148 @@ void setup() {
     outputBit(false);
   }
 
+  //Set counter to 0
+  uint16_t counter = 0;
+
 }
 
-/*
- * 0 = 1111110
- * 1 = 0110000
- * 2 = 1101101
- * 3 = 1111001
- * 4 = 0110011
- * 5 = 1011011
- * 6 = 1011111
- * 7 = 1110000
- * 8 = 1111111
- * 9 = 1110011
- */
+
 
 void loop() {
   // put your main code here, to run repeatedly:
   
-  uint16_t counter = 0;
-  
   for (uint16_t i = 0; i <= 9; i++) {   // Loops from 0-9
-    
     for (uint8_t l = 0; l < 8; l++) {   // Loops from 0-7, sets up LEDs to be latched
-      
-      if (counter = 0) {    //0 = 1111110
-        //Logic
-        for (int i = 0; i < 6; i++) {
-          outputBit(true);
+
+      //If statements that checks for what number counter is on, and displays it
+      //  also increases counter by 1 once finished
+      // 0 = 1111110
+        if (counter = 0) {
+          //Logic
+          for (int i = 0; i < 6; i++) {
+            outputBit(true);
+          }
+            outputBit(false);
+  
+          counter++;
         }
-          outputBit(false);
-        
-      }
+
+      // 1 = 0110000
+        if (counter = 1) {
+          //Logic
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+          for (int i = 0; i < 5; i++) {
+            outputBit(false);
+          }
+  
+          counter++;
+        }
       
-      if (counter = 1) {
-        //Logic
-      }
+      // 2 = 1101101
+        if (counter = 2) {
+          //Logic
+            outputBit(true);
+            outputBit(true);
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+            outputBit(false);
+            outputBit(true);
+  
+          counter++;
+        }
+
+      // 3 = 1111001
+        if (counter = 3) {
+          //Logic
+          for (int i = 0; i < 4; i++) {
+            outputBit(true);
+          }
+            outputBit(false);
+            outputBit(false);
+            outputBit(true);
+  
+          counter++;
+        }
       
-      if (counter = 2) {
-        //Logic
-      }
+      // 4 = 0110011
+        if (counter = 4) {
+          //Logic
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+            outputBit(false);
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+  
+          counter++;
+        }
       
-      if (counter = 3) {
-        //Logic
-      }
+      // 5 = 1011011
+        if (counter = 5) {
+          //Logic
+            outputBit(true);
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
+  
+          counter++;
+        }
       
-      if (counter = 4) {
-        //Logic
-      }
+      // 6 = 1011111
+        if (counter = 6) {
+          //Logic
+            outputBit(true);
+            outputBit(false);
+          for (int i = 0; i < 5; i++) {
+            outputBit(true);
+          }
   
-      if (counter = 5) {
-        //Logic
-      }
+          counter++;
+        }
+      
+      // 7 = 1110000
+        if (counter = 7) {
+          //Logic
+          for (int i = 0; i < 3; i++) {
+            outputBit(true);
+          }
+          for (int i = 0; i < 4; i++) {
+            outputBit(false);
+          }
   
-      if (counter = 6) {
-        //Logic
-      }
+          counter++;
+        }
+
+      // 8 = 1111111
+        if (counter = 8) {
+          //Logic
+          for (int i = 0; i < 7; i++) {
+            outputBit(true);
+          }
+          
+          counter++; 
+        }
+
+      // 9 = 1110011
+        if (counter = 9) {    // 9 = 1110011
+          //Logic
+          for (int i = 0; i < 3; i++) {
+            outputBit(true);
+          }
+            outputBit(false);
+            outputBit(false);
+            outputBit(true);
+            outputBit(true);
   
-      if (counter = 7) {
-        //Logic
-      }
-  
-      if (counter = 8) {
-        //Logic
-      }
-  
-      if (counter = 9) {
-        //Logic
-      }
+          counter = 0;
+        }
     
     clockLatch();
     delay(SPEED);
